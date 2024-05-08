@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Local-First Task Manager 💰</title>
+        <script src="https:unpkg.com/htmx.org/dist/htmx.js"></script>
+    </head>
+
+    <body>
+        <h1>Tasks</h1>
+        <ul id="task-list" hx-get="/api/tasks">
+            <!-- tasks will be loaded dynamically here-->
+            <template hx-target="#task-list" hx-boost="true">
+                <li hx-get="/api/tasks" hx-swap="outerHTML">{{ content }}</li>
+            </template>
+        </ul>
+        <form id="add-task-form" hx-post="/api/tasks" hx-target="#task-list">
+            <input type="text" id="task-content" placeholder="Enter task content" required>
+            <button type="submit">Add a Task 😉</button>
+        </form>
+    </body>
+</html>
