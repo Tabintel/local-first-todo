@@ -24,6 +24,13 @@ func Init(dbPath string) error {
 	return nil
 }
 
+// Close closes the SQLite database connection.
+func Close() {
+	if db != nil {
+		db.Close()
+	}
+}
+
 // CreateTaskTable creates the tasks table in the database if it does not exist.
 func CreateTaskTable() error {
 	query := `

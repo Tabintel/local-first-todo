@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -24,6 +25,11 @@ func main() {
 
 	// Create router
 	router := mux.NewRouter()
+
+	// Serve static files (HTML, CSS, JS) from the "web" directory
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./web/")))
+
+	// Define API routes
 	router.HandleFunc("/api/tasks", getTasksHandler).Methods("GET")
 	router.HandleFunc("/api/tasks", addTaskHandler).Methods("POST")
 
